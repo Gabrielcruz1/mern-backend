@@ -11,6 +11,9 @@ const io = new Server(server);
 //     res.send('<h1>Hello World</h1>')
 // });
 
+app.use("/static", express.static('./static/'));
+
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
 });
