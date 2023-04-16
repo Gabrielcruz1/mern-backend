@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const PORT = 12000
 
+require('./config/db.connection');
+
 // app.get('/', (req, res) => {
 //     res.send('<h1>Hello World</h1>')
 // });
