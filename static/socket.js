@@ -1,1 +1,1 @@
-let socket = io();
+const socket = io();
