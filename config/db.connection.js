@@ -1,20 +1,21 @@
-// In db.connection.js
+///////////////////////////////
+// DEPENDENCIES
+////////////////////////////////
 
+//import dot env for variable test
+require('dotenv').config()
+// pull PORT from .env, give default value of 4000
 const mongoose = require('mongoose');
-require('dotenv').config();
+const {MONGODB_URI} = process.env
 
-// get the MongoDB URI from .env file
-const connectionStr = process.env.MONGODB_URI;
-
+///////////////////////////////
+// DATABASE CONNECTION
+////////////////////////////////
 mongoose.set('strictQuery', true);
-mongoose.connect(connectionStr);
+mongoose.connect(MONGODB_URI)
 
-mongoose.connection.on('connected', () => {
-  console.log(`[${new Date().toLocaleTimeString()}] - MongoDB connected ... 🙌 🙌 🙌`); 
-});
-
-mongoose.connection.on('error', (error) => {
-  console.log('MongoDB connection error 😥', error);
-});
-
-mongoose.connection.on('disconnected', () => console.log('MongoDB disconnected  ⚡️ 🔌 ⚡️'));
+// Connection Events
+mongoose.connection
+  .on("open", () => console.log("You are connected to mongoose"))
+  .on("close", () => console.log("You are disconnected from mongoose"))
+  .on("error", (error) => console.log(error));
