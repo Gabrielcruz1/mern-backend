@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
-const PORT = 12000
 
 require('./config/db.connection');
+
+const { PORT, MONGODB_URI } = process.env;
 
 // 404
 app.all("/*", (req, res) => {
