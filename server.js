@@ -6,14 +6,17 @@ const app = express();
 const cors = require('cors')
 const morgan = require('morgan')
 
-require('./config/db.connection');
+// INITIALIZE .ENV VARIABLES
+require("dotenv").config();
+require("./config/db.connection")
 
 const { PORT, MONGODB_URI } = process.env;
 
 //IMPORT CONTROLLER
 const postController = require('./controllers/post_controller')
 
-app.use('/', postController)
+app.use('/posts', postController)
+
 // 404
 app.all("/*", (req, res) => {
     return res.status(404).json({error:"No resource found"});
