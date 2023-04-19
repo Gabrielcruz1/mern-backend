@@ -1,5 +1,10 @@
+//IMPORTS 
 const express = require('express');
 const app = express();
+
+//APP DEPENDENCIES
+const cors = require('cors')
+const morgan = require('morgan')
 
 require('./config/db.connection');
 
