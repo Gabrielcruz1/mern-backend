@@ -17,6 +17,11 @@ const postController = require('./controllers/post_controller')
 
 app.use('/posts', postController)
 
+
+app.get("/", (req, res) => {
+    res.redirect('/posts');
+});
+
 // 404
 app.all("/*", (req, res) => {
     return res.status(404).json({error:"No resource found"});

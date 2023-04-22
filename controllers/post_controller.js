@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 
 //INDEX
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
     res.send('posts Index Route')
 });
 
