@@ -6,7 +6,7 @@ const app = express();
 const cors = require('cors')
 const morgan = require('morgan')
 
-// INITIALIZE .ENV VARIABLES
+//INITIALIZE .ENV VARIABLES
 require("dotenv").config();
 require("./config/db.connection")
 
@@ -15,8 +15,8 @@ const { PORT, MONGODB_URI } = process.env;
 //IMPORT CONTROLLER
 const postController = require('./controllers/post_controller')
 
+//MIDDLEWARE
 app.use('/posts', postController)
-
 
 app.get("/", (req, res) => {
     res.redirect('/posts');

@@ -7,22 +7,22 @@ router.get('/', async (req, res, next) => {
 });
 
 //POST
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
     res.send('Posts Create Route')
 })
 
 //SHOW
-router.get('/:id', (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
     res.send('Posts Show Route')
 });
 
 //UPDATE
-router.put('/:id', (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
     res.send('Posts Update Route')
 });
 
 //DELETE
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
     res.send('Posts Delete Route')
 });
 
