@@ -16,6 +16,9 @@ const { PORT, MONGODB_URI } = process.env;
 const postController = require('./controllers/post_controller')
 
 //MIDDLEWARE
+app.use(cors())
+app.use(morgan('dev'))
+app.use(express.json());
 app.use('/posts', postController)
 
 app.get("/", (req, res) => {

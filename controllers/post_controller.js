@@ -1,31 +1,57 @@
 const express = require('express')
 const router = express.Router();
-const { Post } = require('../models/Post')
+const { Post } = require('../models/index')
 
 //INDEX
 router.get('/', async (req, res, next) => {
-    res.send('posts Index Route')
+    try {
+        const allPosts = await Post.find({});
+        return res.status(200).json(allPosts)
+    } catch (err) {
+        res.status(400).json({ error: "error" })
+        return next(err)
+    }
 });
 
 //POST
 router.post('/', async (req, res, next) => {
-    res.send('Posts Create Route')
+    try {
+        const createPost = await Post.create(req.body);
+        res.status(201).json(createPost)
+    } catch (err) {
+        res.status(400).json({ error: "error" })
+        return next(err)
+    }
 })
 
 //SHOW
 router.get('/:id', async (req, res, next) => {
-    res.send('Posts Show Route')
+    try{
+
+    } catch(err){
+		res.status(400).json({error: "error"})
+        return next(err)
+    }
 });
 
 //UPDATE
 router.put('/:id', async (req, res, next) => {
-    res.send('Posts Update Route')
+    try {
+
+    } catch(err){
+		res.status(400).json({error: "error"})
+        return next(err)
+    }
 });
 
 //DELETE
 router.delete('/:id', async (req, res, next) => {
-    res.send('Posts Delete Route')
-});
+    try {
 
+    } catch(err){
+		res.status(400).json({error: "error"})
+        return next(err)
+    }
+});
 
 module.exports = router
