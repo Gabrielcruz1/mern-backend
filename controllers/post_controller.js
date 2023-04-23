@@ -27,7 +27,8 @@ router.post('/', async (req, res, next) => {
 //SHOW
 router.get('/:id', async (req, res, next) => {
     try{
-
+        const foundPost = await Post.findById(req.params.id)
+        res.status(200).json(foundPost)
     } catch(err){
 		res.status(400).json({error: "error"})
         return next(err)
