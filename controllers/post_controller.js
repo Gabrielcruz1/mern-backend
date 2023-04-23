@@ -49,7 +49,8 @@ router.put('/:id', async (req, res, next) => {
 //DELETE
 router.delete('/:id', async (req, res, next) => {
     try {
-
+        const deletedPost = await Post.findByIdAndDelete(req.params.id);
+        res.redirect('/posts')
     } catch(err){
 		res.status(400).json({error: "error"})
         return next(err)
