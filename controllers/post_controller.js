@@ -38,7 +38,8 @@ router.get('/:id', async (req, res, next) => {
 //UPDATE
 router.put('/:id', async (req, res, next) => {
     try {
-
+        const updatedPost = await Post.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        return res.status(200).json(updatedPost)
     } catch(err){
 		res.status(400).json({error: "error"})
         return next(err)
