@@ -8,6 +8,11 @@ const PostSchema = new mongoose.Schema({
         type: Number,
         min: [0, "You can not add a negative number"],
         required: [true, "Price can not be empty"]
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     }
 }, { timestamps: true });
 
