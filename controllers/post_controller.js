@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const { Post } = require('../models/index')
+const { handleValidateOwnership, requireToken } = require("../config/auth");
 
 //INDEX
 router.get('/', async (req, res, next) => {
