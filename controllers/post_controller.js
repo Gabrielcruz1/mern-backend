@@ -15,8 +15,11 @@ router.get('/', async (req, res, next) => {
 });
 
 //POST
-router.post('/', async (req, res, next) => {
+router.post('/', requireToken, async (req, res, next) => {
     try {
+        // passport will verify the the token passed with the request's Authorization headers and set the current user for the request.
+        const owner = req.user._id
+        req.body.owner = owner 
         const createPost = await Post.create(req.body);
         res.status(201).json(createPost)
     } catch (err) {
@@ -39,8 +42,9 @@ router.get('/:id', async (req, res, next) => {
 });
 
 //UPDATE
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', requireToken, async (req, res, next) => {
     try {
+        handleValidateOwnership(req, await Post.findById(req.params.id))
         const updatedPost = await Post.findByIdAndUpdate(req.params.id, req.body, { new: true });
         return res.status(200).json(updatedPost)
     } catch (err) {
@@ -50,8 +54,9 @@ router.put('/:id', async (req, res, next) => {
 });
 
 //DELETE
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', requireToken, async (req, res, next) => {
     try {
+        handleValidateOwnership(req, await Post.findById(req.params.id));
         const deletedPost = await Post.findByIdAndDelete(req.params.id);
         res.redirect('/posts')
     } catch (err) {
