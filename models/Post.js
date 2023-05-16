@@ -11,6 +11,7 @@ const PostSchema = new mongoose.Schema({
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
+        //reference to model 
         ref: 'User',
         required: true
     }

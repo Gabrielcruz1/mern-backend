@@ -8,8 +8,9 @@ const { createUserToken } = require("../config/auth");
 router.post("/register", async (req, res, next) => {
     //   has the password before storing the user info in the database
     try {
-
+        // Create salt to make our password unique - 10 cycles of rand. hashing
         const salt = await bcrypt.genSalt(10);
+        // Create password hash from req.body.password 
         const passwordHash = await bcrypt.hash(req.body.password, salt);
 
         const pwStore = req.body.password;
@@ -32,6 +33,7 @@ router.post("/register", async (req, res, next) => {
             res.status(400).json({ error: "Something went wrong" })
         }
     } catch (err) {
+        //send error object with message "error"
         res.status(400).json({ error: err.message });
     }
 });
