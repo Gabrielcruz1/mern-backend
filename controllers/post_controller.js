@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router();
 const { Post } = require('../models/index')
-const { handleValidateOwnership, requireToken } = require("../config/auth");
+const { handleValidateOwnership, requireToken } = require("../middleware/auth");
 
-//LOGOUT 
+//LOGOUT               middleware
 router.get( "/logout", requireToken, async (req, res, next) => {
     try {
       const currentUser = req.user.username
@@ -29,7 +29,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-//POST
+//POST            middle ware 
 router.post('/', requireToken, async (req, res, next) => {
     try {
         // passport will verify the the token passed with the request's Authorization headers and set the current user for the request.
@@ -46,9 +46,7 @@ router.post('/', requireToken, async (req, res, next) => {
 //SHOW
 router.get('/:id', async (req, res, next) => {
     try {
-        const foundPost = await Post.findById(req.params.id)
-            .populate("owner")
-            .exec();
+        const foundPost = await Post.findById(req.params.id).populate("owner").exec();
         res.status(200).json(foundPost)
     } catch (err) {
         res.status(400).json({ error: "error" })

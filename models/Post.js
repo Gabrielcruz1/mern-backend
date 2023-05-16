@@ -10,9 +10,11 @@ const PostSchema = new mongoose.Schema({
         required: [true, "Price can not be empty"]
     },
     owner: {
+        //for owner, store unique type 
         type: mongoose.Schema.Types.ObjectId,
         //reference to model 
         ref: 'User',
+        //can not create post unless has owner
         required: true
     }
 }, { timestamps: true });
